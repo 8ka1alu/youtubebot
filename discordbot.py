@@ -118,7 +118,7 @@ async def on_message(message):
     if not message.author.id == 664880378481213473:
         prob = random.random()
     
-        if prob < 0.35:
+        if prob < 0.05:
             if not message.content.startswith("スロット"): 
                 await message.add_reaction('💝')
 
