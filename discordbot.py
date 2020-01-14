@@ -121,10 +121,6 @@ async def on_message(message):
         if prob < 0.35:
             await message.add_reaction('💝')
 
-    if message.channel.category_id != 662588978029002763:
-        # 指定したIDのカテゴリのチャンネルに対してのみ処理する
-        return
-
     if message.content.startswith("スロット"): 
         suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
         suroto1=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
