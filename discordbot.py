@@ -29,7 +29,7 @@ async def on_ready():
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。')   
-    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
+    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
     
 
 @client.event
@@ -133,7 +133,27 @@ async def on_message(message):
 
     await message_count(message.channel)       
 
-              
+    if message.content.startswith("スロット"): 
+        suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        suroto1=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        suroto2=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        await asyncio.sleep(0.1)
+        my_message = await message.channel.send('スロット結果がここに表示されます！')
+        await asyncio.sleep(3)
+        await my_message.edit(content='？|？|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|？|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|' + suroto1 + '|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2)
+        if suroto == suroto1 == suroto2:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：大当たり！！')
+        elif suroto == suroto1 or suroto == suroto2 or suroto1 == suroto2:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：リーチ！')
+        else:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：ハズレ')
+        
 client.run(TOKEN)
 
 #ノア
