@@ -119,7 +119,8 @@ async def on_message(message):
         prob = random.random()
     
         if prob < 0.35:
-            await message.add_reaction('💝')
+            if not message.content.startswith("スロット"): 
+                await message.add_reaction('💝')
 
     if message.content.startswith("スロット"): 
         suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
