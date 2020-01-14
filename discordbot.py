@@ -125,14 +125,6 @@ async def on_message(message):
         # 指定したIDのカテゴリのチャンネルに対してのみ処理する
         return
 
-    if message.channel.position != 0:
-        # もし一番上のチャンネルでなければ
-        if not message.content.startswith("[sage]"):
-        # [sage]で始まっていなければ
-            await client.get_channel(CHANNEL_ID3).edit(position=0)
-
-    await message_count(message.channel)       
-
     if message.content.startswith("スロット"): 
         suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
         suroto1=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
