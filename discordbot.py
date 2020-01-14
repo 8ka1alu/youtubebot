@@ -5,6 +5,7 @@ from discord.ext import tasks
 from datetime import datetime
 import re
 import random
+from func import diceroll
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -143,6 +144,20 @@ async def on_message(message):
         else:
             await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：ハズレ')
         
+    if message.content.startswith("!dc"):
+        # 入力された内容を受け取る
+        say = message.content 
+
+        # [!dc ]部分を消し、AdBのdで区切ってリスト化する
+        order = say.strip('!dc ')
+        cnt, mx = list(map(int, order.split('d'))) # さいころの個数と面数
+        dice = diceroll(cnt, mx) # 和を計算する関数(後述)
+        await message.channel.send(dice[cnt])
+        del dice[cnt]
+
+        # さいころの目の総和の内訳を表示する
+        await message.channel.send(dice)
+
 client.run(TOKEN)
 
 #ノア
