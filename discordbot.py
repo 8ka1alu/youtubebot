@@ -166,7 +166,7 @@ async def on_message(message):
         await asyncio.sleep(3)
         if coin1==1:
             await my_message.edit(content='定義：○は表、●は裏 \n ```set' + coin1 + '```')
-        if coin1==2:
+        elif coin1==2:
             await my_message.edit(content='定義：●は表、○は裏 \n ```set' + coin1 + '```')
         
 client.run(TOKEN)
