@@ -188,7 +188,7 @@ async def on_message(message):
                 await asyncio.sleep(0.5)
                 await my_message.edit(content='抽選中：　```定義：○は表、●は裏```')
                 await asyncio.sleep(2)
-                await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn' + coin1 + '```')
+                await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn1```')
                 return
             elif message.content == 'coin sn2':
                 my_message = await message.channel.send('コイントスをします！')
@@ -217,7 +217,7 @@ async def on_message(message):
                 await asyncio.sleep(0.5)
                 await my_message.edit(content='抽選中：　```定義：●は表、○は裏```')
                 await asyncio.sleep(2)
-                await my_message.edit(content='　結果：'+ coin + '```定義：●は表、○は裏 \n adid:sn' + coin1 + '```')
+                await my_message.edit(content='　結果：'+ coin + '```定義：●は表、○は裏 \n adid:sn2```')
                 return
         await message.channel.send('Error:You cannot use this command')  
         return
