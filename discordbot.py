@@ -161,13 +161,15 @@ async def on_message(message):
     if message.content.startswith("コイントス"): 
         coin=random.choice(('●', '○'))
         coin1=random.choice(('1', '2'))
+        suji1=1
+        suji2=2
         await asyncio.sleep(0.1)
-        if coin1==1:
+        if coin1 == suji1:
             my_message = await message.channel.send('コイントスをします！')
             await asyncio.sleep(3)
             await my_message.edit(content='定義：○は表、●は裏 \n ```set' + coin1 + '```')
             return
-        elif coin1==2:
+        elif coin1==suji2:
             my_message = await message.channel.send('コイントスをします！')
             await asyncio.sleep(3)
             await my_message.edit(content='定義：●は表、○は裏 \n ```set' + coin1 + '```')
