@@ -190,7 +190,7 @@ async def on_message(message):
                 await asyncio.sleep(2)
                 await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn' + coin1 + '```')
                 return
-          elif message.content == 'coin sn2':
+            elif message.content == 'coin sn2':
                 my_message = await message.channel.send('コイントスをします！')
                 await asyncio.sleep(3)
                 await my_message.edit(content='定義：●は表、○は裏')
