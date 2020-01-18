@@ -158,9 +158,10 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    if message.content.startswith("coin"): 
+    if message.content("coin") or message.content == 'coin sn1' or message.content == 'coin sn2':
         coin=random.choice(('●', '○'))
-        coin1=random.choice(('1', '2'))
+        if not message.content == 'coin sn1' or message.content == 'coin sn2':
+            coin1=random.choice(('1', '2'))
         await asyncio.sleep(0.1)
         if coin1 == '1' or message.content == 'coin sn1':
             my_message = await message.channel.send('コイントスをします！')
