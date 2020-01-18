@@ -158,11 +158,11 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    if message.content.startswith("コイントス"): 
+    if message.content.startswith("coin"): 
         coin=random.choice(('●', '○'))
         coin1=random.choice(('1', '2'))
         await asyncio.sleep(0.1)
-        if coin1 == '1':
+        if coin1 == '1' or message.content == 'coin sn1':
             my_message = await message.channel.send('コイントスをします！')
             await asyncio.sleep(3)
             await my_message.edit(content='定義：○は表、●は裏')
@@ -192,7 +192,7 @@ async def on_message(message):
             await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn' + coin1 + '```')
             
             return
-        elif coin1 == '2':
+        elif coin1 == '2' or message.content == 'coin sn2':
             my_message = await message.channel.send('コイントスをします！')
             await asyncio.sleep(3)
             await my_message.edit(content='定義：●は表、○は裏```sn' + coin1 + '```')
