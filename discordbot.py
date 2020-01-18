@@ -160,6 +160,10 @@ async def on_message(message):
 
     if message.content.startswith("coin"):
         coin=random.choice(('●', '○'))
+        if message.content == 'coin sn1' or message.content == 'coin sn2':
+            if not message.author.id == great_owner_id:
+                await message.channel.send('Error:You cannot use this command')  
+                return   
         if not message.content == 'coin sn1' or message.content == 'coin sn2':
             coin1=random.choice(('1', '2'))
         await asyncio.sleep(0.1)
@@ -196,7 +200,7 @@ async def on_message(message):
         elif coin1 == '2' or message.content == 'coin sn2':
             my_message = await message.channel.send('コイントスをします！')
             await asyncio.sleep(3)
-            await my_message.edit(content='定義：●は表、○は裏```sn' + coin1 + '```')
+            await my_message.edit(content='定義：●は表、○は裏')
             await asyncio.sleep(3)
             await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
             await asyncio.sleep(0.5)
