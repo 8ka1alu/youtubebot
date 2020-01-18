@@ -158,7 +158,7 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    if message.content("coin") or message.content == 'coin sn1' or message.content == 'coin sn2':
+    if message.content.startswith("coin"):
         coin=random.choice(('●', '○'))
         if not message.content == 'coin sn1' or message.content == 'coin sn2':
             coin1=random.choice(('1', '2'))
