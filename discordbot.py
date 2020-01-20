@@ -342,8 +342,8 @@ async def on_message(message):
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID_ALL).purge()
     embed = discord.Embed(title="この鯖のステータス",description="Embed式")
-    embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
-    embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
+    embed.add_field(name="サーバー名",value=f'{guild.name}',inline=False)
+    embed.add_field(name="現オーナー名",value=f'{guild.owner}',inline=False)
     guild = message.guild
     member_count = sum(1 for member in guild.members if not member.bot) 
     bot_count = sum(1 for member in guild.members if member.bot) 
@@ -357,10 +357,10 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
     await client.get_channel(CHANNEL_ID_ALL).purge()
-    guild = message.guild
     embed = discord.Embed(title="この鯖のステータス",description="Embed式")
     embed.add_field(name="サーバー名",value=f'{guild.name}',inline=False)
     embed.add_field(name="現オーナー名",value=f'{guild.owner}',inline=False)
+    guild = message.guild
     member_count = sum(1 for member in guild.members if not member.bot) 
     bot_count = sum(1 for member in guild.members if member.bot) 
     all_count = (member_count) + (bot_count)
