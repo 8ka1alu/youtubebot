@@ -340,6 +340,7 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
+    await client.get_channel(CHANNEL_ID_ALL).purge()
     embed = discord.Embed(title="この鯖のステータス",description="Embed式")
     embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
     embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
@@ -355,6 +356,7 @@ async def on_member_join(member):
 #リムーブメッセージ
 @client.event
 async def on_member_remove(member):
+    await client.get_channel(CHANNEL_ID_ALL).purge()
     embed = discord.Embed(title="この鯖のステータス",description="Embed式")
     embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
     embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
