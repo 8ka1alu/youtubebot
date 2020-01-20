@@ -9,9 +9,12 @@ from func import diceroll
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
+
 CHANNEL_ID = 648435960077615127
 great_owner_id = 459936557432963103
 CHANNEL_ID3 = 664098210264121374
+CHANNEL_ID_ALL = 668861946434682890
+
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -334,6 +337,36 @@ async def on_message(message):
                 elif page_count == 2:
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
+
+@client.event
+async def on_member_join(member):
+    embed = discord.Embed(title="この鯖のステータス",description="Embed式")
+    embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
+    embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
+    guild = message.guild
+    member_count = sum(1 for member in guild.members if not member.bot) 
+    bot_count = sum(1 for member in guild.members if member.bot) 
+    all_count = (member_count) + (bot_count)
+    embed.add_field(name="総人数",value=f'{all_count}',inline=False)
+    embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
+    embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
+    await client.get_channel(CHANNEL_ID_ALL).send(embed=embed)
+
+#リムーブメッセージ
+@client.event
+async def on_member_remove(member):
+    embed = discord.Embed(title="この鯖のステータス",description="Embed式")
+    embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
+    embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
+    guild = message.guild
+    member_count = sum(1 for member in guild.members if not member.bot) 
+    bot_count = sum(1 for member in guild.members if member.bot) 
+    all_count = (member_count) + (bot_count)
+    embed.add_field(name="総人数",value=f'{all_count}',inline=False)
+    embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
+    embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
+    await client.get_channel(CHANNEL_ID_ALL).send(embed=embed)
+
 
 client.run(TOKEN)
 
