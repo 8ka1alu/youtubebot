@@ -288,6 +288,52 @@ async def on_message(message):
             return
         await message.channel.send('Error')
 
+    if message.content == "!help":
+        page_count = 0 #ヘルプの現在表示しているページ数
+        page_content_list = ["ヘルプコマンドです。\n➡絵文字を押すと次のページへ",
+            "ヘルプコマンド2ページ目です。\n➡絵文字で次のページ\n⬅絵文字で前のページ",
+            "ヘルプコマンド最後のページです。\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
+        
+        send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
+        await send_message.add_reaction("➡")
+
+        def help_react_check(reaction,user):
+            '''
+            ヘルプに対する、ヘルプリクエスト者本人からのリアクションかをチェックする
+            '''
+            emoji = str(reaction.emoji)
+            if reaction.message.id != send_message.id:
+                return 0
+            if emoji == "➡" or emoji == "⬅":
+                if user != message.author:
+                    return 0
+                else:
+                    return 1
+
+        while not client.is_closed():
+            try:
+                reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=40.0)
+            except asyncio.TimeoutError:
+                return #時間制限が来たら、それ以降は処理しない
+            else:
+                emoji = str(reaction.emoji)
+                if emoji == "➡" and page_count < 2:
+                    page_count += 1
+                if emoji == "⬅" and page_count > 0:
+                    page_count -= 1
+
+                await send_message.clear_reactions() #事前に消去する
+                await send_message.edit(content=page_content_list[page_count])
+
+                if page_count == 0:
+                    await send_message.add_reaction("➡")
+                elif page_count == 1:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 2:
+                    await send_message.add_reaction("⬅")
+                    #各ページごとに必要なリアクション
+
 client.run(TOKEN)
 
 #ノア
