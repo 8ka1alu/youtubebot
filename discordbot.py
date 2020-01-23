@@ -14,6 +14,8 @@ CHANNEL_ID = 648435960077615127
 great_owner_id = 459936557432963103
 CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
+ksi_ver = '6.0.1'
+discord_py_ver = '3.7.3'
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -46,6 +48,66 @@ async def on_message(message):
 
     if message.author.bot:  # ボットを弾く。
         return 
+
+    if message.content == "おみくじ":
+        # Embedを使ったメッセージ送信 と ランダムで要素を選択
+        embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
+                              color=0x2ECC69)
+        embed.set_thumbnail(url=message.author.avatar_url)
+        embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
+        await message.channel.send(embed=embed)
+        
+    #運勢
+    if message.content == '運勢':
+        prob = random.random()
+    
+        if prob < 0.3:
+            await message.channel.send('凶です……外出を控えることをオススメします')
+           
+        elif prob < 0.65:
+            await message.channel.send('吉です！何かいい事があるかもですね！')
+        
+        elif prob < 0.71:
+            await message.channel.send('末吉……どれくらい運がいいんでしょうね？•́ω•̀)?')
+        
+        elif prob < 0.76:
+            await message.channel.send('半吉は吉の半分、つまり運がいいのです！')
+        
+        elif prob < 0.80:
+            await message.channel.send('小吉ですね！ちょっと優しくされるかも？')
+        
+        elif prob < 0.83:
+            await message.channel.send('吉の中で1番当たっても微妙に感じられる……つまり末吉なのです( ´･ω･`)')
+       
+        elif prob <= 1.0:
+            await message.channel.send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
+        
+
+    if message.content == '御神籤':
+        await asyncio.sleep(0.1)
+        prob = random.random()
+    
+        if prob < 0.02: #大凶
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655056313637666816/20191213233945.jpg')
+        
+        elif prob < 0.10: #凶
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655055945659056134/20191213233816.jpg')
+        
+        elif prob < 0.35: #吉
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655055610441891840/20191213233638.jpg')
+        
+        elif prob < 0.55: #半吉
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054936773754890/20191213233418.jpg')
+        
+        elif prob < 0.75: #小吉
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
+        
+        elif prob < 0.95: #末吉
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
+       
+        elif prob <= 1.0: #大吉
+            await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
+        
 
     if message.content == 'ステータス':
         if message.author.guild_permissions.administrator:
@@ -98,10 +160,10 @@ async def on_message(message):
             await message.channel.send('貴方は管理者権限がありません。 \n You do not have admin roles !!')
 
         #年月日
-    if message.content.startswith('何日？') or message.content == '何日?':
+    if message.content == '何日?':
         date = datetime.now()
         await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
-    if message.content.startswith('何時？') or message.content == '何時?':
+    if message.content == '何時?':
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
 
@@ -292,11 +354,13 @@ async def on_message(message):
             return
         await message.channel.send('Error')
 
-    if message.content == "!help":
+    if message.content == 'ヘルプ':
         page_count = 0 #ヘルプの現在表示しているページ数
-        page_content_list = ["ヘルプコマンドです。\n➡絵文字を押すと次のページへ",
-            "ヘルプコマンド2ページ目です。\n➡絵文字で次のページ\n⬅絵文字で前のページ",
-            "ヘルプコマンド最後のページです。\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
+        page_content_list = [">>> **リリナコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
+            ">>> **ノアコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
+            ">>> **ノアコマンド一覧(ページ3)**\n\n以下のコマンドは<#624496341124513793>で使えます。\n\n**おみくじ**or**御神籤**：おみくじが引けます！\n**運勢**：貴方の運勢は！\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
+            ">>> **ノアコマンド一覧(ページ4)**\n\n以下のコマンドは管理者用\n**ステータス**：この鯖のステータスです。\n**ステータスE**：Embed版です。\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
+            ">>> **このBOT詳細情報(ページ5)**\n\nBOT名前：" + f"{client.user.name}" + "\nBOT ID：" + f"{client.user.id}" + "\nDiscordバージョン：" + f"{discord.__version__}" + "\nDiscord.pyバージョン：" + discord_py_ver + "\n開発バージョン：" + ksi_ver + "\n開発者：<@459936557432963103>\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容] #ヘルプの各ページ内容
         
         send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
         await send_message.add_reaction("➡")
@@ -316,12 +380,14 @@ async def on_message(message):
 
         while not client.is_closed():
             try:
-                reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=40.0)
+                reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
             except asyncio.TimeoutError:
+                msg_end = '\n stop'
+                await send_message.edit(content=page_content_list[page_count] + msg_end)
                 return #時間制限が来たら、それ以降は処理しない
             else:
                 emoji = str(reaction.emoji)
-                if emoji == "➡" and page_count < 2:
+                if emoji == "➡" and page_count < 4:
                     page_count += 1
                 if emoji == "⬅" and page_count > 0:
                     page_count -= 1
@@ -336,38 +402,13 @@ async def on_message(message):
                     await send_message.add_reaction("➡")
                 elif page_count == 2:
                     await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 3:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 4:
+                    await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
-
-@client.event
-async def on_member_join(member):
-    await client.get_channel(CHANNEL_ID_ALL).purge()
-    embed = discord.Embed(title="この鯖のステータス",description="Embed式")
-    embed.add_field(name="サーバー名",value=f'{guild.name}',inline=False)
-    embed.add_field(name="現オーナー名",value=f'{guild.owner}',inline=False)
-    guild = message.guild
-    member_count = sum(1 for member in guild.members if not member.bot) 
-    bot_count = sum(1 for member in guild.members if member.bot) 
-    all_count = (member_count) + (bot_count)
-    embed.add_field(name="総人数",value=f'{all_count}',inline=False)
-    embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
-    embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
-    await client.get_channel(CHANNEL_ID_ALL).send(embed=embed)
-
-#リムーブメッセージ
-@client.event
-async def on_member_remove(member):
-    await client.get_channel(CHANNEL_ID_ALL).purge()
-    embed = discord.Embed(title="この鯖のステータス",description="Embed式")
-    embed.add_field(name="サーバー名",value=f'{guild.name}',inline=False)
-    embed.add_field(name="現オーナー名",value=f'{guild.owner}',inline=False)
-    guild = message.guild
-    member_count = sum(1 for member in guild.members if not member.bot) 
-    bot_count = sum(1 for member in guild.members if member.bot) 
-    all_count = (member_count) + (bot_count)
-    embed.add_field(name="総人数",value=f'{all_count}',inline=False)
-    embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
-    embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
-    await client.get_channel(CHANNEL_ID_ALL).send(embed=embed)
 
 
 client.run(TOKEN)
