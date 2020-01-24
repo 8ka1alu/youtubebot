@@ -382,7 +382,7 @@ async def on_message(message):
             try:
                 reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
             except asyncio.TimeoutError:
-                msg_end = '\n stop'
+                msg_end = '\n ```stop```'
                 await send_message.edit(content=page_content_list[page_count] + msg_end)
                 return #時間制限が来たら、それ以降は処理しない
             else:
@@ -393,7 +393,8 @@ async def on_message(message):
                     page_count -= 1
 
                 await send_message.clear_reactions() #事前に消去する
-                await send_message.edit(content=page_content_list[page_count])
+                msg_act = '\n ```Active```'
+                await send_message.edit(content=page_content_list[page_count] + msg_act)
 
                 if page_count == 0:
                     await send_message.add_reaction("➡")
