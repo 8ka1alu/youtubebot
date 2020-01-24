@@ -16,9 +16,7 @@ CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
-ID_CHANNEL_QUESTION = 670157316649254922 # 質問チャンネルID  
-ID_CATEGORY_QA = 670157265457774592 # 質問スレカテゴリID  
-  
+
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -411,18 +409,6 @@ async def on_message(message):
                 elif page_count == 4:
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
-
-    if message.channel.id == ID_CHANNEL_QUESTION:  
-        await qa_thread(message)  
-
-
-async def qa_thread(message):  
-    category_qa = client.get_channel(ID_CATEGORY_QA)  
-    channel_name = f'q{len(category_qa.text_channels)}'  
-    payload = {'name': channel_name, 'category': category_qa, 'position': 0}  
-    channel_qa = await message.guild.create_text_channel(**payload)  
-    await channel_qa.send(message.jump_url)  
-    await client.get_channel(ID_CHANNEL_QUESTION).edit(position=0)  
 
 client.run(TOKEN)
 
