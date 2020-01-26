@@ -46,6 +46,20 @@ async def on_message(message):
         await asyncio.sleep(2*60*60)
         await message.channel.send('<@&650506130325372950> bumpチャンス！') 
 
+    if message.content == 'rcwh':
+        webhooks = await message.guild.webhooks() # 既存のwebhookの取得
+    
+        if not webhooks:
+            await message.channel.send("Webhookがないので作成します。")
+            try:
+                await message.channel.create_webhook(name="Webuhukku")
+            except:
+                await message.channel.send("Webhookの作成に失敗しました。")
+            else:
+                await message.channel.send("ついに初作成に成功しました・・・")
+        else:
+            await message.channel.send("既に作成されています。")
+
     url_re = r"https://discordapp.com/channels/(\d{18})/(\d{18})/(\d{18})"
     url_list  = re.findall(url_re,message.content)
     
