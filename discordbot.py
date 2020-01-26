@@ -46,6 +46,20 @@ async def on_message(message):
         await asyncio.sleep(2*60*60)
         await message.channel.send('<@&650506130325372950> bumpチャンス！') 
 
+    url_re = r"https://discordapp.com/channels/(\d{18})/(\d{18})/(\d{18})"
+    url_list  = re.findall(url_re,message.content)
+    
+    for url in url_list:
+        guild_id,channel_id,message_id = url
+        channel = client.get_channel(int(channel_id))
+
+        if channel is not None:
+            got_message = await channel.fetch_message(message_id)
+
+            if got_message is not None:
+                await message.channel.send(embed=open_message(got_message))
+ 
+
     if message.author.bot:  # ボットを弾く。
         return 
 
@@ -411,6 +425,29 @@ async def on_message(message):
                 elif page_count == 4:
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
+
+                await message.channel.send(embed=open_message(got_message))
+        
+def open_message(message):
+    """
+    メッセージを展開し、作成した埋め込みに各情報を添付し返す関数
+
+    Args:
+        message (discord.Message) : 展開したいメッセージ
+
+    Returns:
+        embed (discord.Embed) : メッセージの展開結果の埋め込み
+    """
+
+    embed = discord.Embed(title=message.content,description=f"[メッセージリンク]({message.jump_url})",color=0x7fbfff)
+
+    embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url) #メッセージ送信者
+    embed.set_footer(text=message.guild.name, icon_url=message.guild.icon_url) #メッセージのあるサーバー
+    embed.timestamp = message.created_at #メッセージの投稿時間
+
+    if message.attachments:
+        embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
+    return embed
 
 client.run(TOKEN)
 
