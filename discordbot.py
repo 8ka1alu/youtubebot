@@ -61,7 +61,7 @@ async def on_message(message):
             await message.channel.send("既に作成されています。")
 
     if message.content == 'rwhu':
-        wh_url = await message.channel.webhook_url
+        wh_url = message.channel.webhook_url
         await message.channel.send(wh_url)
 
     url_re = r"https://discordapp.com/channels/(\d{18})/(\d{18})/(\d{18})"
