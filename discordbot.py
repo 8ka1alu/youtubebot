@@ -47,7 +47,7 @@ async def on_message(message):
         await message.channel.send('<@&650506130325372950> bumpチャンス！') 
 
     if message.content == 'rcwh':
-        webhooks = await message.guild.webhooks() # 既存のwebhookの取得
+        webhooks = await message.channel.webhooks() # 既存のwebhookの取得
     
         if not webhooks:
             await message.channel.send("Webhookがないので作成します。")
