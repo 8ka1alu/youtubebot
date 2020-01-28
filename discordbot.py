@@ -143,34 +143,6 @@ async def on_message(message):
 
     if message.content == 'ステータス':
         if message.author.guild_permissions.administrator:
-            await message.channel.send(f'サーバー名：{message.guild.name}')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'現オーナー名：{message.guild.owner}')
-            await asyncio.sleep(0.1)
-            guild = message.guild
-            member_count = sum(1 for member in guild.members if not member.bot) 
-            bot_count = sum(1 for member in guild.members if member.bot) 
-            all_count = (member_count) + (bot_count)
-            await message.channel.send(f'総人数：{all_count}人')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'ユーザ数：{member_count}')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'BOT数：{bot_count}')
-            await asyncio.sleep(0.1) 
-            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
-            await asyncio.sleep(0.1)
-            embed = discord.Embed(title="サーバーアイコン")
-            embed.set_image(url=message.guild.icon_url)
-            await message.channel.send(embed=embed)
-        if not message.author.guild_permissions.administrator:
-            await message.channel.send('貴方は管理者権限がありません。 \n You do not have admin roles !!')
-
-    if message.content == 'ステータスE':
-        if message.author.guild_permissions.administrator:
             embed = discord.Embed(title="この鯖のステータス",description="Embed式")
             embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
             embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
@@ -181,8 +153,6 @@ async def on_message(message):
             embed.add_field(name="総人数",value=f'{all_count}',inline=False)
             embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
             embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
-            all_channel = len(message.guild.text_channels) + len(message.guild.voice_channels)
-            embed.add_field(name="総チャンネル数",value= all_channel + '個',inline=False)
             embed.add_field(name="テキストチャンネル数",value=f'{len(message.guild.text_channels)}個',inline=False)
             embed.add_field(name="ボイスチャンネル数",value=f'{len(message.guild.voice_channels)}個',inline=False)
             embed.set_thumbnail(url=message.guild.icon_url)
@@ -391,7 +361,7 @@ async def on_message(message):
         page_content_list = [">>> **ノアコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
             ">>> **ノアコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
             ">>> **ノアコマンド一覧(ページ3)**\n\n**おみくじ**or**御神籤**：おみくじが引けます！\n**運勢**：貴方の運勢は！\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
-            ">>> **ノアコマンド一覧(ページ4)**\n\n以下のコマンドは__管理者権限__が必要\n**ステータス**：この鯖のステータスです。\n**ステータスE**：Embed版です。\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
+            ">>> **ノアコマンド一覧(ページ4)**\n\n以下のコマンドは__管理者権限__が必要\n**ステータス**：この鯖のステータスです。\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
             ">>> **このBOT詳細情報(ページ5)**\n\nBOT名前：" + f"{client.user.name}" + "\nBOT ID：" + f"{client.user.id}" + "\nDiscordバージョン：" + f"{discord.__version__}" + "\nDiscord.pyバージョン：" + discord_py_ver + "\n開発バージョン：" + ksi_ver + "\n開発者：<@459936557432963103>\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容] #ヘルプの各ページ内容
         
         send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
