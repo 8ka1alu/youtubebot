@@ -16,6 +16,8 @@ CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
+member_join_count == None
+member_join_name == None
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -40,6 +42,26 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
+    if message.content == '/join':
+        if member_join_name == message.member.name:
+            await message.channel.send('参加しています。') 
+        elif member_join_name != message.member.name:
+            member_join_name += message.member.name
+            member_join_count += 1
+            await message.channel.send('参加しました') 
+    
+    if message.content == '/remove':
+        if member_join_name != message.member.name:
+            await message.channel.send('参加していません。') 
+        elif member_join_name == message.member.name:
+            member_join_name -= message.member.name
+            member_join_count -= 1
+            await message.channel.send('参加解除しました') 
+    
+    if message.content == '/member':
+        await message.channel.send(member_join_name) 
+        await message.channel.send(member_join_count) 
     
     if 'Bumpを確認しました' in message.content:
         await message.channel.send('bumpを確認しました！2時間後お願いします！') 
