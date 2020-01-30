@@ -438,8 +438,7 @@ async def on_message(message):
                     await message.channel.send("Webhookの作成に失敗しました。")
                 else:
                     await message.channel.send(GLOBAL_WEBHOOK_NAME+"で作成しました。")
-                # そのチャンネルに hoge-webhook というWebhookは無かったので無視
-                continue
+                return
             await webhook.send(content=message.content,
                 username=message.author.name,
                 avatar_url=message.author.avatar_url_as(format="png"))
