@@ -431,16 +431,7 @@ async def on_message(message):
             webhook = discord.utils.get(ch_webhooks, name=GLOBAL_WEBHOOK_NAME)
 
             if webhook is None:
-                webhooks = await message.guild.webhooks() # 既存のwebhookの取得
-                if not webhooks:
-                    await message.channel.send("Webhookがないので作成します。")
-                    try:
-                        await message.channel.create_webhook(name=GLOBAL_WEBHOOK_NAME)
-                    except:
-                        await message.channel.send("Webhookの作成に失敗しました。")
-                    else:
-                        await message.channel.send(GLOBAL_WEBHOOK_NAME+"で作成しました。")
-                    return
+                continue
             await webhook.send(content=message.content,
                 username=message.author.name,
                 avatar_url=message.author.avatar_url_as(format="png"))
