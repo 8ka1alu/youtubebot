@@ -428,8 +428,8 @@ async def on_message(message):
                     await message.channel.create_webhook(name=GLOBAL_WEBHOOK_NAME)
                 except:
                     await message.channel.send("Webhookの作成に失敗しました。")
-                else:
-                    await message.channel.send("作成しました(name="+GLOBAL_WEBHOOK_NAME+")")
+                    return
+                await message.channel.send("作成しました(name="+GLOBAL_WEBHOOK_NAME+")")
            else:
                 await message.channel.send("既に作成されています。")
 
