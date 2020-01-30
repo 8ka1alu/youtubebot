@@ -46,24 +46,6 @@ async def on_message(message):
         await asyncio.sleep(2*60*60)
         await message.channel.send('<@&650506130325372950> bumpチャンス！') 
 
-    if message.content == 'rcwh':
-        webhooks = await message.channel.webhooks() # 既存のwebhookの取得
-    
-        if not webhooks:
-            await message.channel.send("Webhookがないので作成します。")
-            try:
-                await message.channel.create_webhook(name="Webuhukku")
-            except:
-                await message.channel.send("Webhookの作成に失敗しました。")
-            else:
-                await message.channel.send("ついに初作成に成功しました・・・")
-        else:
-            await message.channel.send("既に作成されています。")
-
-    if message.content == 'rwhu':
-        wh_url = message.channel.webhook_url
-        await message.channel.send(wh_url)
-
     url_re = r"https://discordapp.com/channels/(\d{18})/(\d{18})/(\d{18})"
     url_list  = re.findall(url_re,message.content)
     
@@ -435,7 +417,21 @@ async def on_message(message):
             await webhook.send(content=message.content,
                 username=message.author.name,
                 avatar_url=message.author.avatar_url_as(format="png"))
-   
+
+    if message.content == 'r!crwh':
+        if message.author.id == great_owner_id:
+            webhooks = await message.channel.webhooks() # 既存のwebhookの取得
+    
+            if not webhooks:
+                await message.channel.send("Webhookがないので作成します。")
+                try:
+                    await message.channel.create_webhook(name=GLOBAL_WEBHOOK_NAME)
+                except:
+                    await message.channel.send("Webhookの作成に失敗しました。")
+                else:
+                    await message.channel.send("作成しました(name="+GLOBAL_WEBHOOK_NAME+")")
+           else:
+                await message.channel.send("既に作成されています。")
 
 def open_message(message):
     """
