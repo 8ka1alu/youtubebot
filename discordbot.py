@@ -419,6 +419,7 @@ async def on_message(message):
                 avatar_url=message.author.avatar_url_as(format="png"))
 
     if message.content == 'r!crwh':
+        await message.delete()
         if message.author.id == great_owner_id:
             webhooks = await message.channel.webhooks() # 既存のwebhookの取得
     
@@ -432,6 +433,8 @@ async def on_message(message):
                     await message.channel.send("作成しました(name="+GLOBAL_WEBHOOK_NAME+")")
             else:
                 await message.channel.send("既に作成されています。")
+        else:
+            await message.channel.send("貴方はこのコマンドを扱えません")
 
 def open_message(message):
     """
