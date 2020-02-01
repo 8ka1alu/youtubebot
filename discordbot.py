@@ -424,7 +424,7 @@ async def on_message(message):
         # hoge-globalの名前をもつチャンネルに投稿されたので、メッセージを転送する
         await message.delete()
 
-        if 'discord.gg//' in message.content:
+        if 'discord.gg' in message.content:
             await message.channel.send("ここで招待は送れません。")
             return
 
