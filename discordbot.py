@@ -42,12 +42,13 @@ async def on_ready():
 async def on_message(message):
 
     if message.content == "時":
-        channel01 = client.get_channel(673229098180411395)
-        date = datetime.now()
-        await asyncio.sleep(1)
-        await channel01.purge()
-        tmp = await channel01.send("時") # 編集するメッセージを保持
-        await tmp.edit( content = f"{date.year}年{date.month}月{date.day}日\n{date.hour}時{date.minute}分{date.second}秒" )
+        if message.channel.name == "時計"
+            channel01 = client.get_channel(673229098180411395)
+            date = datetime.now()
+            await asyncio.sleep(1)
+            await channel01.purge()
+            #tmp = await channel01.send("時") # 編集するメッセージを保持
+            await message.edit( content = f"{date.year}年{date.month}月{date.day}日\n{date.hour}時{date.minute}分{date.second}秒" )
 
     if 'Bumpを確認しました' in message.content:
         await message.channel.send('bumpを確認しました！2時間後お願いします！') 
