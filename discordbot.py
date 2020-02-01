@@ -34,20 +34,22 @@ async def on_ready():
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
-    await channel.send('状態：BOT再起動しました。')   
+    await channel.send('状態：BOT再起動しました。') 
+    channel01 = client.get_channel(673229098180411395)
+    await channel.send("時")
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
     
 
 @client.event
 async def on_message(message):
 
-    if message.content == "時":
+    if "時" in message.content:
         if message.channel.name == "時計"
-            channel01 = client.get_channel(673229098180411395)
+            #channel01 = client.get_channel(673229098180411395)
             date = datetime.now()
             await asyncio.sleep(1)
             await channel01.purge()
-            #tmp = await channel01.send("時") # 編集するメッセージを保持
+            #tmp = await channel.send("時") # 編集するメッセージを保持
             await message.edit( content = f"{date.year}年{date.month}月{date.day}日\n{date.hour}時{date.minute}分{date.second}秒" )
 
     if 'Bumpを確認しました' in message.content:
