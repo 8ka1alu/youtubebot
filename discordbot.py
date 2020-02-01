@@ -74,6 +74,9 @@ async def on_message(message):
     if message.author.bot:  # ボットを弾く。
         return 
 
+    if message.content == "時入れ":
+        await client.get_channel(673229098180411395).send("時")
+
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
         embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
