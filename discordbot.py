@@ -43,7 +43,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-    if "時" in message.content:
+    if '時' in message.content:
         if message.channel.name == "時計"
             #channel01 = client.get_channel(673229098180411395)
             date = datetime.now()
