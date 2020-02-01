@@ -44,7 +44,7 @@ async def on_ready():
 async def on_message(message):
 
     if '時' in message.content:
-        if message.channel.name == "時計"
+        if message.channel.name == "時計":
             #channel01 = client.get_channel(673229098180411395)
             date = datetime.now()
             await asyncio.sleep(1)
