@@ -36,14 +36,14 @@ async def on_ready():
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。') 
     channel01 = client.get_channel(673229098180411395)
-    await channel01.send("時")
+    await channel01.send("年月日")
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
     
 
 @client.event
 async def on_message(message):
 
-    if '時' in message.content:
+    if '年' in message.content:
         if message.channel.name == "時計":
             #channel01 = client.get_channel(673229098180411395)
             date = datetime.now()
