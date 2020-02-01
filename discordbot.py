@@ -424,6 +424,10 @@ async def on_message(message):
         # hoge-globalの名前をもつチャンネルに投稿されたので、メッセージを転送する
         await message.delete()
 
+        if 'discord.gg//' in message.content:
+            await message.channel.send("ここで招待は送れません。")
+            return
+
         channels = client.get_all_channels()
         global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
 
