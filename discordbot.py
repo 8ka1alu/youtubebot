@@ -36,7 +36,7 @@ async def on_ready():
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。') 
     channel01 = client.get_channel(673229098180411395)
-    await channel.send("時")
+    await channel01.send("時")
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
     
 
