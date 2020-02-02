@@ -410,8 +410,6 @@ async def on_message(message):
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
 
-                await message.channel.send(embed=open_message(got_message))
-
     GLOBAL_CH_NAME = "noa-global-chat" # グローバルチャットのチャンネル名
     GLOBAL_WEBHOOK_NAME = "noa-webhook" # グローバルチャットのWebhook名
 
