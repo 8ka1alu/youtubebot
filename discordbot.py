@@ -94,7 +94,7 @@ async def on_message(message):
             elif reply.content == "グー":
                 result = "パー"
      
-            else:
+            elif not reply.content == "グー" or reply.content == "チョキ" or reply.content == "パー":
                 await message.channel.send("不適切な返事です。\nあなたの負け！")
                 return
 
