@@ -74,8 +74,25 @@ async def on_message(message):
     if message.author.bot:  # ボットを弾く。
         return 
 
-    if message.content == "時入れ":
-        await client.get_channel(673229098180411395).send("時")
+    if message.content == "ジャンケン":
+
+        await message.channel.send( "最初はグー、じゃんけん" )
+        
+        def jankencheck(m):
+            return m.content == "グー" or "チョキ" or "パー" and m.author == message.author
+
+        reply = await client.wait_for( "message" , check = jankencheck )
+
+        if reply.content == "チョキ":
+            result = "グー"
+
+        elif reply.content == "パー":
+            result = "チョキ"
+
+        elif reply.content == "グー":
+            result = "パー"
+     
+        await message.channel.send( result + "を出しました \nあなたの負け！" )
 
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
