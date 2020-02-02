@@ -81,7 +81,7 @@ async def on_message(message):
         def jankencheck(m):
             return m.content == "グー" or "チョキ" or "パー" and m.author == message.author
         try:
-            reply = await client.wait_for( "message" , check = jankencheck , timeout = 5.0 )
+            reply = await client.wait_for( "message" , check = jankencheck , timeout = 10.0 )
         except asyncio.TimeoutError:
             await message.channel.send( "後出しはいけませんよ！\nあなたの負け！" )
         else:
