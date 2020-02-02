@@ -154,7 +154,7 @@ async def on_message(message):
             embed.set_thumbnail(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
 
-        if not message.author.guild_permissions.administrator:
+        else:
             await message.channel.send('貴方は管理者権限がありません。 \n You do not have admin roles !!')
 
         #年月日
