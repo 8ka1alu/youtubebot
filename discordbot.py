@@ -138,7 +138,7 @@ async def on_message(message):
         
 
     if message.content == 'ステータス':
-        if message.author.guild_permissions.administrator:
+        if message.author.guild_permissions.administrator or if message.author.id == great_owner_id:
             embed = discord.Embed(title="この鯖のステータス",description="Embed式")
             embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
             embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
