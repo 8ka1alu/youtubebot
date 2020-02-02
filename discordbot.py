@@ -73,26 +73,28 @@ async def on_message(message):
 
     if message.author.bot:  # ボットを弾く。
         return 
-
+        
     if message.content == "ジャンケン":
 
         await message.channel.send( "最初はグー、じゃんけん" )
         
         def jankencheck(m):
             return m.content == "グー" or "チョキ" or "パー" and m.author == message.author
+        try:
+            reply = await client.wait_for( "message" , check = jankencheck , timeout = 5.0 )
+        except asyncio.TimeoutError:
+            await message.channel.send( "後出しはいけませんよ！\nあなたの負け！" )
+        else:
+            if reply.content == "チョキ":
+                result = "グー"
 
-        reply = await client.wait_for( "message" , check = jankencheck )
+            elif reply.content == "パー":
+                result = "チョキ"
 
-        if reply.content == "チョキ":
-            result = "グー"
-
-        elif reply.content == "パー":
-            result = "チョキ"
-
-        elif reply.content == "グー":
-            result = "パー"
+            elif reply.content == "グー":
+                result = "パー"
      
-        await message.channel.send( result + "を出しました \nあなたの負け！" )
+            await message.channel.send( result + "を出しました \nあなたの負け！" )
 
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
