@@ -79,7 +79,7 @@ async def on_message(message):
             await message.channel.send( "テスト" )
             counter = counter + 1
 
-    baner_count = 0
+    global baner_count
     if message.content == "!baner":
         if baner_count == 0:
             baner_count = 1
