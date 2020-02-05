@@ -39,6 +39,9 @@ async def on_ready():
     await channel01.send("年月日")
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
     
+@client.event
+async def on_reaction_add(reaction, user):
+    print(reaction.emoji.id)
 
 @client.event
 async def on_message(message):
