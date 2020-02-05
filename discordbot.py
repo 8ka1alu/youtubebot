@@ -73,7 +73,13 @@ async def on_message(message):
 
     if message.author.bot:  # ボットを弾く。
         return 
-        
+     
+    if message.content == "ワイテス":
+        counter = 0
+        while counter<10:
+            await message.channel.send( "テスト" )
+            counter = counter + 1
+
     if message.content == "ジャンケン":
 
         await message.channel.send( "最初はグー、じゃんけん" )
