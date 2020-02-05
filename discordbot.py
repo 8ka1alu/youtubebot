@@ -81,11 +81,10 @@ async def on_message(message):
 
     baner_count = 0
     if message.content == "!baner":
+        global baner_count
         if baner_count == 0:
-            global baner_count
             baner_count = 1
         elif baner_count == 1:
-            global baner_count
             baner_count = 0
     if message.content == "!check":
         await message.channel.send(baner_count)
