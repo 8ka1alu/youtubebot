@@ -16,7 +16,6 @@ CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
-baner_count = 0
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -42,8 +41,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-
-    global baner_count
 
     if '年' in message.content:
         if message.channel.name == "時計":
@@ -81,14 +78,6 @@ async def on_message(message):
         while counter<10:
             await message.channel.send( "テスト" )
             counter = counter + 1
-
-    if message.content == "!baner":
-        if baner_count == 1:
-            baner_count = 0
-        elif baner_count == 0:
-            baner_count = 1
-    elif message.content == "!check":
-        await message.channel.send(baner_count)
 
     if message.content == "ジャンケン":
 
