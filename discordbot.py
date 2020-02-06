@@ -44,7 +44,6 @@ async def on_ready():
 async def on_message(message):
 
     global baner_count
-    baner_count += 1
 
     if '年' in message.content:
         if message.channel.name == "時計":
@@ -85,9 +84,9 @@ async def on_message(message):
 
     if message.content == "!baner":
         if baner_count == 1:
-            baner_count -= 2
-        elif baner_count == 0:
             baner_count = 0
+        elif baner_count == 0:
+            baner_count = 1
     elif message.content == "!check":
         await message.channel.send(baner_count)
 
