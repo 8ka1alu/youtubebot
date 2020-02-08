@@ -465,8 +465,6 @@ get_channel_id = {673412098683830284:673412099350855702,633956743616921620:63425
 async def on_member_join(member.guild):
    await client.get_channel(get_channel_id[member.guild]).send(f'ようこそ、**{member.mention}**さん！あなたの訪問を歓迎させていただきます、翠です！')
 
-デコレータは関数(もしくはコルーチン)の直上でないと作動しない気がしました確か（たぶん） 
-
 client.run(TOKEN)
 
 #ノア
