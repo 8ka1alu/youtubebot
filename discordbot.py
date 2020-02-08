@@ -40,17 +40,6 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
 
 @client.event
-async def on_member_join(message):
-    if guild.id == 673412098683830284:
-        await message.channel.send("テスト(Join)")
-
-@client.event
-async def on_member_remove(message):
-    if guild.id == 673412098683830284:
-        await message.channel.send("テスト(Join)")
-
-
-@client.event
 async def on_message(message):
 
     if '年' in message.content:
@@ -449,49 +438,6 @@ async def on_message(message):
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
 
-    GLOBAL_CH_NAME = "noa-global-chat" # グローバルチャットのチャンネル名
-    GLOBAL_WEBHOOK_NAME = "noa-webhook" # グローバルチャットのWebhook名
-
-    if message.content == 'r!crwh':
-        await message.delete()
-        if message.author.id == great_owner_id:
-            webhooks = await message.channel.webhooks() # 既存のwebhookの取得
-    
-            if not webhooks:
-                await message.channel.send("Webhookがないので作成します。")
-                try:
-                    await message.channel.create_webhook(name=GLOBAL_WEBHOOK_NAME)
-                except:
-                    await message.channel.send("Webhookの作成に失敗しました。")
-                else:
-                    await message.channel.send("作成しました(name="+GLOBAL_WEBHOOK_NAME+")")
-            else:
-                await message.channel.send("既に作成されています。")
-        else:
-            await message.channel.send("貴方はこのコマンドを扱えません")
-        return
-
-    if message.channel.name == GLOBAL_CH_NAME:
-        # hoge-globalの名前をもつチャンネルに投稿されたので、メッセージを転送する
-        await message.delete()
-
-        if 'discord.gg' in message.content:
-            await message.channel.send("ここで招待は送れません。")
-            return
-
-        channels = client.get_all_channels()
-        global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
-
-        for channel in global_channels:
-            ch_webhooks = await channel.webhooks()
-            webhook = discord.utils.get(ch_webhooks, name=GLOBAL_WEBHOOK_NAME)
-
-            if webhook is None:
-                continue
-            await webhook.send(content=message.content,
-                username=message.author.name,
-                avatar_url=message.author.avatar_url_as(format="png"))
-
 def open_message(message):
     """
     メッセージを展開し、作成した埋め込みに各情報を添付し返す関数
@@ -512,6 +458,14 @@ def open_message(message):
     if message.attachments:
         embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
     return embed
+
+#ウェルカムメッセージ
+get_channel_id = {673412098683830284:673412099350855702,633956743616921620:634257472865173525}
+@client.event
+async def on_member_join(member.guild):
+   await client.get_channel(get_channel_id[member.guild]).send(f'ようこそ、**{member.mention}**さん！あなたの訪問を歓迎させていただきます、翠です！')
+
+デコレータは関数(もしくはコルーチン)の直上でないと作動しない気がしました確か（たぶん） 
 
 client.run(TOKEN)
 
