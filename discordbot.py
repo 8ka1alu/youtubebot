@@ -446,16 +446,23 @@ def open_message(message):
 
 tundras = 673412098683830284
 tundrach = 673412099350855702
+alus = 628566224460185630
+aluch = 628567106501345281
+
 #ウェルカムメッセージ
 @client.event
 async def on_member_join(member):
     if member.guild.id == tundras:
         await client.get_channel(tundrach).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
+    if member.guild.id == alus:
+        await client.get_channel(aluch).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
 
 @client.event
 async def on_member_remove(member):
     if member.guild.id == tundras:
         await client.get_channel(tundrach).send(f'**{member.name}がサーバーを離れました。**')
+    if member.guild.id == alus:
+        await client.get_channel(aluch).send(f'**{member.name}がサーバーを離れました。**')
 
 client.run(TOKEN)
 
