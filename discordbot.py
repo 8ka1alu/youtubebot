@@ -448,12 +448,12 @@ tundrach = 673412099350855702
 #ウェルカムメッセージ
 @client.event
 async def on_member_join(member):
-    if channel.id == tundrach:
+    if message.channel.id == tundrach:
         await client.get_channel(tundrach).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
 
 @client.event
 async def on_member_remove(member):
-    if channel.id == tundrach:
+    if message.channel.id == tundrach:
         await client.get_channel(tundrach).send(f'**{member.name}がサーバーを離れました。**')
 
 client.run(TOKEN)
