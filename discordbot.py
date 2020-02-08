@@ -42,15 +42,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-    if '年' in message.content:
-        if message.channel.name == "時計":
-            #channel01 = client.get_channel(673229098180411395)
-            date = datetime.now()
-            await asyncio.sleep(1)
-            #await channel01.purge()
-            #tmp = await channel.send("時") # 編集するメッセージを保持
-            await message.edit( content = f"{date.year}年{date.month}月{date.day}日\n{date.hour}時{date.minute}分{date.second}秒" )
-
     if 'Bumpを確認しました' in message.content:
         await message.channel.send('bumpを確認しました！2時間後お願いします！') 
         await asyncio.sleep(2*60*60)
@@ -72,12 +63,6 @@ async def on_message(message):
 
     if message.author.bot:  # ボットを弾く。
         return 
-     
-    if message.content == "ワイテス":
-        counter = 0
-        while counter<10:
-            await message.channel.send( "テスト" )
-            counter = counter + 1
 
     if message.content == "ジャンケン":
 
@@ -459,11 +444,18 @@ def open_message(message):
         embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
     return embed
 
+tundras = 673412098683830284
+tundrach = 673412099350855702
 #ウェルカムメッセージ
-get_channel_id = {673412098683830284:673412099350855702,633956743616921620:634257472865173525}
 @client.event
 async def on_member_join(member):
-    await client.get_channel(get_channel_id[member.guild]).send(f'ようこそ、**{member.mention}**さん！あなたの訪問を歓迎させていただきます、翠です！')
+    if message.channel.id == tundras:
+        await client.get_channel(tundrach).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
+
+@client.event
+async def on_member_remove(member):
+    if message.channel.id == tundras:
+        await client.get_channel(tundrach).send(f'**{member.name}がサーバーを離れました。**')
 
 client.run(TOKEN)
 
