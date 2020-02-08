@@ -40,6 +40,17 @@ async def on_ready():
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
 
 @client.event
+async def on_member_join(message):
+    if guild_id == 673412098683830284:
+        await message.channel.send("テスト(Join)")
+
+@client.event
+async def on_member_remove(message):
+    if guild_id == 673412098683830284:
+        await message.channel.send("テスト(Join)")
+
+
+@client.event
 async def on_message(message):
 
     if '年' in message.content:
