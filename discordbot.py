@@ -444,16 +444,17 @@ def open_message(message):
         embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
     return embed
 
+tundras = 673412098683830284
 tundrach = 673412099350855702
 #ウェルカムメッセージ
 @client.event
 async def on_member_join(member):
-    if message.channel.id == tundrach:
+    if member.guild.id == tundras:
         await client.get_channel(tundrach).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
 
 @client.event
 async def on_member_remove(member):
-    if message.channel.id == tundrach:
+    if member.guild.id == tundras:
         await client.get_channel(tundrach).send(f'**{member.name}がサーバーを離れました。**')
 
 client.run(TOKEN)
