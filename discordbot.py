@@ -171,10 +171,10 @@ async def on_message(message):
             await message.channel.send('貴方は管理者権限がありません。 \n You do not have admin roles !!')
 
         #年月日
-    if message.content == '何日?':
+    if message.content == '何日？':
         date = datetime.now()
         await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
-    if message.content == '何時?':
+    if message.content == '何時？':
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
 
