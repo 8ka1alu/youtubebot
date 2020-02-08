@@ -41,12 +41,12 @@ async def on_ready():
 
 @client.event
 async def on_member_join(message):
-    if guild_id == 673412098683830284:
+    if member.guild.id == 673412098683830284:
         await message.channel.send("テスト(Join)")
 
 @client.event
 async def on_member_remove(message):
-    if guild_id == 673412098683830284:
+    if member.guild.id == 673412098683830284:
         await message.channel.send("テスト(Join)")
 
 
