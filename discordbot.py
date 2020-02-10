@@ -42,6 +42,7 @@ async def on_ready():
 
 @client.event
 async def on_voice_state_update(member, before, after): 
+    channels = client.get_all_channels()
     # channelsはbotの取得できるチャンネルのイテレーター
     global_channels = [ch for ch in channels if ch.name == g_set]
     # global_channelsは issue-global の名前を持つチャンネルのリスト
