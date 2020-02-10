@@ -16,6 +16,7 @@ CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
+g_set = 'voice-log'
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -38,6 +39,22 @@ async def on_ready():
     channel01 = client.get_channel(673229098180411395)
     await channel01.send("年月日")
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
+
+@client.event
+async def on_voice_state_update(member, before, after): 
+    # channelsはbotの取得できるチャンネルのイテレーター
+    global_channels = [ch for ch in channels if ch.name == g_set]
+    # global_channelsは issue-global の名前を持つチャンネルのリスト
+    for schannel in global_channels:
+        if before.channel != after.channel:
+            # before.channelとafter.channelが異なるなら入退室
+            if after.channel and len(after.channel.members) == 1:
+                # もし、ボイスチャットが開始されたら
+                await schannel.send(f"{member.name}さんが通話を開始しました。\n場所：<#{after.channel.id}>(←クリックすると直接入れます)")
+
+            if before.channel and len(before.channel.members) == 0:
+                # もし、ボイスチャットが終了したら
+                await schannel.send(f"{member.name}さんが通話を終了しました。\n場所：{before.channel.name}")
 
 @client.event
 async def on_message(message):
