@@ -82,6 +82,25 @@ async def on_message(message):
     if message.author.bot:  # ボットを弾く。
         return 
 
+    if client.user in message.mentions: # 話しかけられたかの判定
+        hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
+        reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```' #返信メッセージの作成
+        await message.channel.send(reply) # 返信メッセージを送信
+
+    if message.content.startswith("おはよ"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.author.id == great_owner_id:
+            await message.channel.send('おはようございます！マスターさん！今日も一日頑張って下さい！') 
+        if not message.author.id == great_owner_id:
+            await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
+
+    if message.content.startswith("おやす"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.author.id == great_owner_id:
+            await message.channel.send('おやすみなさい！マスターさん！今日も一日お疲れさまでした！') 
+        if not message.author.id == great_owner_id:
+            await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
+
     if message.content == "ジャンケン":
 
         await message.channel.send( "最初はグー、じゃんけん" )
@@ -479,9 +498,9 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
     if member.guild.id == tundras:
-        await client.get_channel(tundrach).send(f'**{member.name}がサーバーを離れました。**')
+        await channel.send(f'**{member.name}がサーバーを離れました。**')
     if member.guild.id == alus:
-        await client.get_channel(aluch).send(f'**{member.name}がサーバーを離れました。**')
+        await channel.send(f'**{member.name}がサーバーを離れました。**')
 
 client.run(TOKEN)
 
