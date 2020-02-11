@@ -467,7 +467,7 @@ tundrach = 673412099350855702
 alus = 628566224460185630
 aluch = 628567106501345281
 
-#ウェルカムメッセージ
+#Joinメッセージ
 @client.event
 async def on_member_join(member):
     if member.guild.id == tundras:
@@ -475,6 +475,7 @@ async def on_member_join(member):
     if member.guild.id == alus:
         await client.get_channel(aluch).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
 
+#Removeメッセージ
 @client.event
 async def on_member_remove(member):
     if member.guild.id == tundras:
