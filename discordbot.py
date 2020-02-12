@@ -470,7 +470,7 @@ def open_message(message):
     Returns:
         embed (discord.Embed) : メッセージの展開結果の埋め込み
     """
-    color_code = discord.Color(random.randint(0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5))
+    color_code = discord.Color(random.choice(0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5))
     embed = discord.Embed(title=message.content,description=f"[メッセージリンク]({message.jump_url})",color=color_code)
 
     embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url) #メッセージ送信者
