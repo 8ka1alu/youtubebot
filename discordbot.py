@@ -219,7 +219,32 @@ async def on_message(message):
     if message.content == '何時？':
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
-
+    if message.content == '時計':
+        weekday = datetime.date.today().weekday()
+        if weekday == 0:
+            weekday_name == "月曜日"
+        elif weekday == 0:
+            weekday_name == "火曜日"
+        elif weekday == 0:
+            weekday_name == "水曜日"
+        elif weekday == 0:
+            weekday_name == "木曜日"
+        elif weekday == 0:
+            weekday_name == "金曜日"
+       elif weekday == 0:
+            weekday_name == "土曜日"
+       elif weekday == 0:
+            weekday_name == "日曜日"
+       elae:
+            weekday_name == "エラー"
+       date = datetime.now()
+       embed = discord.Embed(title="時計", description="TimeZone=Japan",color=random.choice((0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5)))
+       embed.add_field(name="日付", value=f'{date.year}年{date.month}月{date.day}日{weekday_name}', inline=False)
+       embed.add_field(name="時間", value=f'{date.hour}時{date.minute}分{date.second}秒', inline=False)
+       embed.set_thumbnail(url=0)
+       await message.channel.send(embed=embed)
+        
+ 
     if message.content == 'nrestart': 
         if message.author.id == great_owner_id:
             await message.channel.send('再起動します')
