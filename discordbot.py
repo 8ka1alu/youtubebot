@@ -35,9 +35,7 @@ async def on_ready():
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
-    await channel.send('状態：BOT再起動しました。') 
-    channel01 = client.get_channel(673229098180411395)
-    await channel01.send("年月日")
+    await channel.send('状態：BOT再起動しました。')
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
 
 @client.event
@@ -220,20 +218,20 @@ async def on_message(message):
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
     if message.content == '時計':
-        weekday = datetime.date.today().weekday()
-        if weekday == 0:
+        weekdays = datetime.datetime.weekday()
+        if weekdays == 0:
             weekday_name == "月曜日"
-        elif weekday == 1:
+        elif weekdays == 1:
             weekday_name == "火曜日"
-        elif weekday == 2:
+        elif weekdays == 2:
             weekday_name == "水曜日"
-        elif weekday == 3:
+        elif weekdays == 3:
             weekday_name == "木曜日"
-        elif weekday == 4:
+        elif weekdays == 4:
             weekday_name == "金曜日"
-        elif weekday == 5:
+        elif weekdays == 5:
             weekday_name == "土曜日"
-        elif weekday == 6:
+        elif weekdays == 6:
             weekday_name == "日曜日"
         else:
             weekday_name == "エラー"
