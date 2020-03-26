@@ -2,7 +2,7 @@ import discord
 import os
 import asyncio
 from discord.ext import tasks
-from datetime import datetime
+import datetime
 import re
 import random
 from func import diceroll
@@ -212,13 +212,13 @@ async def on_message(message):
 
         #年月日
     if message.content == '何日？':
-        date = datetime.now()
+        date = datetime.datetime.now()
         await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
     if message.content == '何時？':
-        date = datetime.now()
+        date = datetime.datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
     if message.content == '時計':
-        weekdays = datetime.datetime.date.weekday()
+        weekdays = datetime.date.weekday()
         if weekdays == 0:
             weekday_name == "月曜日"
         elif weekdays == 1:
@@ -235,7 +235,7 @@ async def on_message(message):
             weekday_name == "日曜日"
         else:
             weekday_name == "エラー"
-        date = datetime.now()
+        date = datetime.datetime.now()
         embed = discord.Embed(title="時計", description="TimeZone=Japan",color=random.choice((0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5)))
         embed.add_field(name="日付", value=f'{date.year}年{date.month}月{date.day}日{weekday_name}', inline=False)
         embed.add_field(name="時間", value=f'{date.hour}時{date.minute}分{date.second}秒', inline=False)
