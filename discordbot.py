@@ -509,27 +509,61 @@ def open_message(message):
         embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
     return embed
 
-tundras = 673412098683830284
-tundrach = 673412099350855702
-alus = 628566224460185630
-aluch = 628567106501345281
+logch_id = 673412099350855702
 
-#Joinメッセージ
 @client.event
 async def on_member_join(member):
-    if member.guild.id == tundras:
-        await client.get_channel(tundrach).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
-    if member.guild.id == alus:
-        await client.get_channel(aluch).send(f'ようこそ、**{member.name}**さん！私は{client.user.name}です。\n私の機能で分からないことがありましたら、```ヘルプ```と発言してください。')
-
-#Removeメッセージ
+    guild = member.guild 
+    member_count = sum(1 for member in guild.members if not member.bot)
+    bot_count = sum(1 for member in guild.members if member.bot)
+    logch = client.get_channel(logch_id)
+    msg = [
+        f"鳥だ！飛行機だ！いや{member.mention}",
+        f"綺麗な月と{member.mention}ですね……",
+        f"まぶしい朝には{member.mention}を一杯！うまい！",
+        f"{member.mention}がご降臨なさった！崇め敬え奉れ！",
+        f"にげろ！{member.mention}だ！",
+        f"{member.mention}生きとったんかワレ！",
+        f"うるせえ{member.mention}なげるぞ！",
+        f"あ！{member.mention}だ！",
+        f"予期されていたかのように{member.mention}が現れた……",
+        f"野生の{member.mention}が現れた！",
+        f"綺麗な夕日と{member.mention}に乾杯"
+    ]
+    embed = discord.Embed(
+        title = "ようこそ！",
+        description = random.choice(msg) + f"\n現在のメンバーは**{str(member_count)}**人です。\nBotは**{str(bot_count)}**個です。",
+        color = random.choice((0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5))
+    )
+    embed.timestamp = datetime.now(JST) 
+    await logch.send(embed=embed) 
+    
 @client.event
 async def on_member_remove(member):
-    if member.guild.id == tundras:
-        await channel.send(f'**{member.name}がサーバーを離れました。**')
-    if member.guild.id == alus:
-        await channel.send(f'**{member.name}がサーバーを離れました。**')
-
+    guild = member.guild 
+    member_count = sum(1 for member in guild.members if not member.bot)
+    bot_count = sum(1 for member in guild.members if member.bot)
+    logch = client.get_channel(logch_id)
+    msg = [
+        f"森へおかえり、{member.mention}",
+        f"僕は全てを失った。金も、名誉も、{member.mention}も",
+        f"だれだゴミ箱に{member.mention}を入れたのは",
+        f"ねえマミー、僕の{member.mention}はどこー？",
+        f"さようならっ{member.mention}！",
+        f"{member.mention}\nあいつは良い奴だったよ",
+        f"{member.mention}は星になったのさ"
+    ]
+    embed = discord.Embed(
+        title = "さようなら(´;ω;｀)！",
+        description = (
+            random.choice(msg) + 
+            f"\n現在のメンバーは**{str(member_count)}**人です。\nBotは**{str(bot_count)}**個です。"
+        ),
+        color = random.choice((0,0x1abc9c,0x11806a,0x2ecc71,0x1f8b4c,0x3498db,0x206694,0x9b59b6,0x71368a,0xe91e63,0xad1457,0xf1c40f,0xc27c0e,0xe67e22,0x95a5a6,0x607d8b,0x979c9f,0x546e7a,0x7289da,0x99aab5))
+    )
+    embed.timestamp = datetime.now(JST)  
+    await logch.send(embed=embed) 
+    
 client.run(TOKEN)
 
 #ノア
