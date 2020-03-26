@@ -567,5 +567,3 @@ async def on_member_remove(member):
 client.run(TOKEN)
 
 #ノア
-#グローバルチャット
-
