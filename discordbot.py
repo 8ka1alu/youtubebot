@@ -218,7 +218,7 @@ async def on_message(message):
         date = datetime.datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
     if message.content == '時計':
-        weekdays = datetime.date.weekday()
+        weekdays = datetime.date.today().weekday()
         if weekdays == 0:
             weekday_name == "月曜日"
         elif weekdays == 1:
