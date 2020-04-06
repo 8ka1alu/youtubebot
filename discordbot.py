@@ -58,7 +58,7 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
 
-    if '表示順をアップ' in message.content:
+    if "表示順をアップ" in message.embeds[0].title[-7:]:
         await message.channel.send('bumpを確認しました！2時間後お願いします！') 
         await asyncio.sleep(2*60*60)
         await message.channel.send('BUMP時間です！') 
