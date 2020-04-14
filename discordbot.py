@@ -63,10 +63,12 @@ async def on_message(message):
         await asyncio.sleep(2*60*60)
         await message.channel.send('BUMP時間です！') 
 
-    if 'Bumpを確認しました' in message.content:
-        await message.channel.send('bumpを確認しました！2時間後お願いします！') 
-        await asyncio.sleep(2*60*60)
-        await message.channel.send('<@&650506130325372950> bumpチャンス！') 
+    if 'DISBOARD' in message.embeds[0].title[-7:]:
+        for f in message.embeds[0].fields:
+            if f.name == "DISBOARDで確認してね:":
+                await message.channel.send('bumpを確認しました！2時間後お願いします！') 
+                await asyncio.sleep(2*60*60)
+                await message.channel.send('<@&650506130325372950> bumpチャンス！') 
 
     url_re = r"https://discordapp.com/channels/(\d{18})/(\d{18})/(\d{18})"
     url_list  = re.findall(url_re,message.content)
