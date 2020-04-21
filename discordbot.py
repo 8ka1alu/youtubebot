@@ -6,7 +6,7 @@ import datetime
 import re
 import random
 from func import diceroll
-import requests
+import urllib.request
 import json
 
 #トークン
@@ -21,10 +21,8 @@ discord_py_ver = '3.7.3'
 g_set = 'voice-log'
 
 url = "https://api.p2pquake.net/v1/human-readable?limit=1"
-#requests.getを使うと、レスポンス内容を取得できるのでとりあえず変数へ保存
-response = requests.get(url)
-#response.json()でJSONデータに変換して変数へ保存
-jsonData = response.json()
+resp = urllib.request.urlopen(url).read()
+resp = json.loads(resp.decode('utf-8'))
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -96,7 +94,7 @@ async def on_message(message):
         return 
 
     if message.content == "json":
-        await message.channel.send(jsonData)
+        await message.channel.send(resp)
 
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
