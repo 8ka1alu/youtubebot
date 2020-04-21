@@ -82,7 +82,7 @@ async def on_message(message):
         return 
 
     if message.content == "json":
-        await message.channel.send(resp)
+        await message.channel.send(resp["code"])
 
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
