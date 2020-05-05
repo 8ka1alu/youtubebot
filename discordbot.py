@@ -71,14 +71,13 @@ async def on_message(message):
             if got_message is not None:
                 await message.channel.send(embed=open_message(got_message))
  
-
-    if message.author.bot:  # ボットを弾く。
-        return 
-
     if message.author.id == 302050872383242240 :
         await message.channel.send(message.embeds[0].title)
         await message.channel.send(message.embeds[0].description)
         
+    if message.author.bot:  # ボットを弾く。
+        return
+    
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
         reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```' #返信メッセージの作成
