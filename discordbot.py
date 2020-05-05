@@ -72,9 +72,11 @@ async def on_message(message):
                 await message.channel.send(embed=open_message(got_message))
  
     if message.author.id == 302050872383242240 :
-        await message.channel.send(message.embeds[0].title)
-        await message.channel.send(message.embeds[0].description)
-        
+        if "表示順をアップ" in message.embeds[0].description:
+            await message.channel.send("Bumpを確認しました。2時間後に通知します。")
+            await asyncio.sleep(2*60*60)
+            await message.channel.send("Bump可能通知")
+
     if message.author.bot:  # ボットを弾く。
         return
     
