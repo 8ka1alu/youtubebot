@@ -6,8 +6,6 @@ import datetime
 import re
 import random
 from func import diceroll
-import urllib.request
-import json
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -19,10 +17,6 @@ CHANNEL_ID_ALL = 668861946434682890
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
 g_set = 'voice-log'
-
-url = "https://api.p2pquake.net/v1/human-readable?limit=1"
-resp = urllib.request.urlopen(url).read()
-resp = json.loads(resp.decode('utf-8'))
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -81,9 +75,10 @@ async def on_message(message):
     if message.author.bot:  # ボットを弾く。
         return 
 
-    if message.content == "json":
-        await message.channel.send(resp["code"])
-
+    if message.author.id == 302050872383242240 :
+        await message.channel.send(message.embeds[0].title)
+        await message.channel.send(message.embeds[0].description)
+        
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
         reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```' #返信メッセージの作成
