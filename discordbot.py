@@ -73,10 +73,17 @@ async def on_message(message):
  
     if message.author.id == 302050872383242240 :
         if "表示順をアップ" in message.embeds[0].description:
-            await message.channel.send("Bumpを確認しました。2時間後に通知します。")
-            await asyncio.sleep(2*60*60)
-            await message.channel.send("Bump可能通知")
-
+            msg = await message.channel.send("Bumpを確認しました。2時間後に通知します。")
+            await asyncio.sleep(10)
+            m = 0
+            while m < 7201:
+                b = 7200
+                s = b - m
+                await msg.edit(content=f"あと{s}秒後にBumpできます。")
+                await asyncio.sleep(1)
+                m += 1
+            await msg.edit(content=f"Bump可能")
+            
     if message.author.bot:  # ボットを弾く。
         return
     
