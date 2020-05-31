@@ -511,7 +511,7 @@ def open_message(message):
         embed.set_image(url=message.attachments[0].url) #もし画像があれば、最初の画像を添付する
     return embed
 
-logch_id = 673412099350855702
+logch_id = 681260083145080879
 
 @client.event
 async def on_member_join(member):
