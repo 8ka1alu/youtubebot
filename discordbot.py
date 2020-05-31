@@ -547,13 +547,13 @@ async def on_member_remove(member):
     bot_count = sum(1 for member in guild.members if member.bot)
     logch = client.get_channel(logch_id)
     msg = [
-        f"森へおかえり、{member.mention}",
-        f"僕は全てを失った。金も、名誉も、{member.mention}も",
-        f"だれだゴミ箱に{member.mention}を入れたのは",
-        f"ねえマミー、僕の{member.mention}はどこー？",
-        f"さようならっ{member.mention}！",
-        f"{member.mention}\nあいつは良い奴だったよ",
-        f"{member.mention}は星になったのさ"
+        f"森へおかえり、{member.name}",
+        f"僕は全てを失った。金も、名誉も、{member.name}も",
+        f"だれだゴミ箱に{member.name}を入れたのは",
+        f"ねえマミー、僕の{member.name}はどこー？",
+        f"さようならっ{member.name}！",
+        f"{member.name}\nあいつは良い奴だったよ",
+        f"{member.name}は星になったのさ"
     ]
     embed = discord.Embed(
         title = "さようなら(´;ω;｀)！",
