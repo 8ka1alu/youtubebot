@@ -14,6 +14,7 @@ CHANNEL_ID = 676738177062535168
 great_owner_id = 459936557432963103
 CHANNEL_ID3 = 664098210264121374
 CHANNEL_ID_ALL = 668861946434682890
+osu_ch=716633585712365618
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
 g_set = 'voice-log'
@@ -570,12 +571,12 @@ async def on_member_remove(member):
 async def loop():
     # 現在の時刻
     now = datetime.datetime.now().strftime('%H:%M')
-    if now == '09:00':
-        channel = client.get_channel(CHANNEL_ID)
-        await channel.send('９：００です！おはようございます！今日も一日頑張りましょう！')  
-    elif now == '23:00':
-        channel = client.get_channel(CHANNEL_ID)
-        await channel.send('２３：００です！おやすみなさい！以降のメンションはお控え下さい。') 
+    if now == '08:00':
+        channel = client.get_channel(osu_ch)
+        await channel.send('８：００です！(テスト中)')  
+    elif now == '20:00':
+        channel = client.get_channel(osu_ch)
+        await channel.send('２０：００です！(テスト中)') 
 #ループ処理実行
 loop.start()
   
