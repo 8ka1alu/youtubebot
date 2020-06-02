@@ -570,13 +570,10 @@ async def on_member_remove(member):
 @tasks.loop(seconds=60)
 async def loop():
     # 現在の時刻
-    now = datetime.datetime.now().strftime('%H:%M')
-    if now == '08:00':
+    now = datetime.datetime.now().strftime('%D')
+    if now == '1':
         channel = client.get_channel(osu_ch)
-        await channel.send('８：００です！(テスト中)')  
-    elif now == '20:00':
-        channel = client.get_channel(osu_ch)
-        await channel.send('２０：００です！(テスト中)') 
+        await channel.send('1日です！(テスト中)')   
 #ループ処理実行
 loop.start()
   
