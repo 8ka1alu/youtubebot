@@ -32,7 +32,7 @@ async def on_ready():
     print('Hello World,リマインドbotプログラム「project-RRN」、起動しました')
     channel = client.get_channel(CHANNEL_ID)
     d=datetime.datetime.now()
-    await channel.send(f'再起動しました\n{d.year}/{d.month}/{d.day}/{d.hour}/{d.minute}/{d.second}')
+    await channel.send(f'再起動しました\n`{d.year}{d.month}{d.day}\n{d.hour}{d.minute}{d.second}`')
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
 
 @client.event
