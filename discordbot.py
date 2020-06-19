@@ -31,12 +31,8 @@ async def on_ready():
     print('----------------')
     print('Hello World,リマインドbotプログラム「project-RRN」、起動しました')
     channel = client.get_channel(CHANNEL_ID)
-    await channel.purge()
-    await channel.send(f'名前:{client.user.name}')  # ボットの名前
-    await channel.send(f'ID:{client.user.id}')  # ボットのID
-    await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
-    await channel.send('----------------')
-    await channel.send('状態：BOT再起動しました。')
+    d=datetime.datetime.now()
+    await channel.send(f'再起動しました\n{d.year}/{d.month}/{d.day}/{d.hour}/{d.minute}/{d.seconds}')
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
 
 @client.event
